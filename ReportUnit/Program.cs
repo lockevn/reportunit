@@ -38,7 +38,7 @@ namespace ReportUnit
         ///         args.length = 2 && args[0] is xml-input && args[1] is html-output
         /// </param>
         static void Main(string[] args)
-        {
+        {   
             int exitCode;
             try
             {
@@ -74,7 +74,7 @@ namespace ReportUnit
                                 Directory.CreateDirectory(Directory.GetParent(args[1]).FullName);
 
                             input = args[0];
-                            outputDirectory = Directory.GetParent(args[1]).FullName;    
+                            outputDirectory = Directory.GetParent(args[1]).FullName;
                             break;                        
                         }
 
@@ -113,7 +113,7 @@ namespace ReportUnit
                         outputDirectory = args[0];                        
                         break;
                 }
-                exitCode = new ReportUnitService().CreateReport(input, outputDirectory) ? 0 : 1;
+                exitCode = new ReportUnitService().CreateReport(input, outputDirectory, Path.GetFileName(args[1])) ? 0 : 1;
             }
             catch (Exception exception)
             {

@@ -22,7 +22,7 @@ namespace ReportUnit
 
         public ReportUnitService() { }
 
-        public bool CreateReport(string input, string outputDirectory)
+        public bool CreateReport(string input, string outputDirectory, string outputFile = "")
         {
             var attributes = File.GetAttributes(input);
             IEnumerable<FileInfo> filePathList;
@@ -82,7 +82,12 @@ namespace ReportUnit
                 report.SideNavLinks = compositeTemplate.SideNavLinks;
 
                 var html = Engine.Razor.RunCompile(Templates.TemplateManager.GetFileTemplate(), "report", typeof(Model.Report), report, null);
-                File.WriteAllText(Path.Combine(outputDirectory, report.FileName + ".html"), html);
+
+                if (string.IsNullOrWhiteSpace(outputFile))
+                {
+                    outputFile = report.FileName + ".html";
+                }
+                File.WriteAllText(Path.Combine(outputDirectory, outputFile), html);
             }
             return true;
         }
