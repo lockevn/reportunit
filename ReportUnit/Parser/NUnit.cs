@@ -99,7 +99,15 @@ namespace ReportUnit.Parser
             suites.AsParallel().ToList().ForEach(ts =>
             {
                 var testSuite = new TestSuite();
-                testSuite.Name = ts.Attribute("name").Value;
+                testSuite.Name = ts.Attribute("name").Value;                
+                testSuite.Id = ts.Attribute("id").Value;
+                                
+                testSuite.Total = int.Parse(ts.Attribute("total").Value);
+                testSuite.Passed = int.Parse(ts.Attribute("passed").Value);
+                testSuite.Failed = int.Parse(ts.Attribute("failed").Value);
+                testSuite.Inconclusive = int.Parse(ts.Attribute("inconclusive").Value);
+                testSuite.Skipped = int.Parse(ts.Attribute("skipped").Value);
+                testSuite.Summary = $"total={testSuite.Total} passed={testSuite.Passed} failed={testSuite.Failed} inconclusive={testSuite.Inconclusive} skipped={testSuite.Skipped}";
 
                 // Suite Time Info
                 testSuite.StartTime = 

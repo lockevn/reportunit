@@ -10,9 +10,21 @@ namespace ReportUnit.Model
             this.Status = Status.Unknown;
         }
 
+        public string Id { get; set; }
+
         public string Name { get; set; }
-        
+               
+
         public string Description { get; set; }
+
+
+        public string Summary { get; set; }
+        public int Total { get; set; }
+        public int Passed { get; set; }
+        public int Failed { get; set; }
+        public int Inconclusive { get; set; }
+        public int Skipped { get; set; }
+        
 
         public Status Status { get; set; }
 

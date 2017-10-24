@@ -18,7 +18,7 @@
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <meta name='description' content=''>
         <meta name='author' content=''>
-        <title>ReportUnit TestRunner Report</title>
+        <title>ReportUnit-mod (lockevn) TestRunner Report</title>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css' rel='stylesheet' type='text/css'>
         <link href='https://cdn.rawgit.com/reportunit/reportunit/005dcf934c5a53e60b9ec88a2a118930b433c453/cdn/reportunit.css' type='text/css' rel='stylesheet' />
                     
@@ -36,7 +36,7 @@
                             
                 <ul class='left'>
                     <li class='logo'>
-                        <a href='http://reportunit.relevantcodes.com/'><span>ReportUnit</span></a>
+                        <a href='https://github.com/lockevn/reportunit'><span>ReportUnit-mod</span></a>
                     </li>
                 </ul>
 
@@ -115,7 +115,8 @@
                     <div id='suites' class='suites'>
                         <div class='col'>
                             <div class='card-panel no-padding no-margin-v suite-list v-spacer'>
-                                <div class='filters card-panel'>
+                                @*  LOCKEVN-ignoring this non-functional filters
+                                    <div class='filters card-panel'>
                                     <div>
                                         <a class='dropdown-button button' href='#' data-hover='true' data-beloworigin='true' data-constrainwidth='true' data-activates='suite-toggle' title='Filter suites'><i class='mdi-file-folder-open icon'></i></a><ul class='dropdown-content' id='suite-toggle'></ul>
                                         <ul>
@@ -158,22 +159,27 @@
                                     <div> 
                                         <a title='Enable Dashboard' id='enableDashboard' class='enabled'><i class='mdi-action-track-changes icon active'></i></a> 
                                     </div>
-                                </div>
+                                </div>*@
                                 <ul id='suite-collection' class='no-margin-v'>
                                     @for (var ix = 0; ix < Model.TestSuiteList.Count; ix++)
-                                    {
-                                        <li class='suite @Model.TestSuiteList[ix].Status.ToString().ToLower()'>
+                                    {                                        
+                                        var ts = Model.TestSuiteList[ix];
+                                                                                
+                                        <li id="@ts.Id" class='suite @Model.TestSuiteList[ix].Status.ToString().ToLower()'>
                                             <div class='suite-head'>
                                                 <div class='suite-name'>@Model.TestSuiteList[ix].Name</div>
                                                 <div class='suite-result @Model.TestSuiteList[ix].Status.ToString().ToLower() right label'>@Model.TestSuiteList[ix].Status.ToString()</div>
                                             </div>
+                                            <sup class="purple-text small">@ts.Summary</sup>
                                             <div class='suite-content hide'>
                                                 <span title='Suite started at time' class='startedAt label green lighten-2 text-white'>@Model.TestSuiteList[ix].StartTime</span>
                                                 @if (!String.IsNullOrEmpty(@Model.TestSuiteList[ix].EndTime))
                                                 {
                                                     <span title='Suite ended at time' class='endedAt label label red lighten-2 text-white'>@Model.TestSuiteList[ix].EndTime</span>
                                                 }
-                                                <div class='fixture-status-message'>
+                                                <div class='IGNORE-fixture-status-message'>
+                                                    <sup>@ts.Summary</sup>
+
                                                     @if (!String.IsNullOrEmpty(@Model.TestSuiteList[ix].Description)) 
                                                     {
                                                         <div class='suite-desc'>@Model.TestSuiteList[ix].Description</div>
@@ -238,7 +244,7 @@
                                                                         <td>
                                                                                     
                                                                             <div class='badge showStatusMessage error'><i class='mdi-alert-warning'></i></div>
-                                                                            <pre class='hide'>@test.StatusMessage.Replace("<", "&lt;").Replace(">", "&gt;")</pre>
+                                                                            <pre class='IGNORE-hide'>@test.StatusMessage.Replace("<", "&lt;").Replace(">", "&gt;")</pre>
                                                                         </td>
                                                                     }
                                                                     else 
